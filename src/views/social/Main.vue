@@ -70,7 +70,7 @@
     export default {
         data() {
             return {
-                activeTab: "followers",
+                activeTab: "following",
                 followers: {
                     query: {
                         page: 1,
@@ -100,7 +100,6 @@
         },
         mounted() {
             this.onSelect()
-
         },
         methods: {
             onSelect() {
@@ -151,8 +150,6 @@
                     }
                 }).then(() => this.following.loading = false)
             },
-
-
         }
     }
 </script>

@@ -1,11 +1,17 @@
-import request from '@/utils/request'
-import store from '../store/index'
+import request from '@/utils/request';
+import store from '../store/index';
 
 export default {
     verifyToken: function (token) {
+        // return request({
+        //     url: '/user?access_token=' + token
+        // })
         return request({
-            url: '/user?access_token=' + token
-        })
+            url: '/user',
+            headers: {
+                'Authorization': `token ${token}`
+            }
+        });
     },
     getInfo: function () {
         let githubUsername = store.state.configuration.githubUsername

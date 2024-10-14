@@ -1,7 +1,7 @@
-import Cookie from '@/utils/cookie'
 import UserApi from '@/api/user'
-import store from '../index'
+import Cookie from '@/utils/cookie'
 import Vue from 'vue'
+import store from '../index'
 
 const TOKEN_KEY = "TOKEN_KEY"
 const token = {
@@ -25,6 +25,8 @@ const token = {
             UserApi.verifyToken(accessToken).then((response) => {
                 let result = response.data
                 let githubUsername = store.state.configuration.githubUsername
+                console.log('当前配置的gtihub用户名:' + githubUsername)
+                console.log('请求验证gtihub登录用户名:' + result['login'])
                 if (githubUsername == result['login']) {
                     commit('SET_TOKEN', accessToken)
                     Vue.prototype.$notify({
@@ -42,8 +44,8 @@ const token = {
                         type: 'error'
                     })
                 }
-            }).catch(() => {
-
+            }).catch((error) => {
+                console.error('验证Token异常：'+error)
             })
         },
         Cancellation({ commit }) {

@@ -1,5 +1,4 @@
 <template>
-
     <div :style="'background: #f8f8f8;min-height: '+windowSize.height+'px'">
         <van-nav-bar style="position:fixed;top:0;z-index: 9999; box-shadow: 0px -3px 10px #888888;width: 100%;" title="个人中心" />
         <div style="height: 60px;"></div>
@@ -29,7 +28,6 @@
             is-link />
 
         <van-cell class="mobile-border mobile-margin-top" title="　其他博客" icon="password-view" :url="blog" is-link />
-
     </div>
 </template>
 

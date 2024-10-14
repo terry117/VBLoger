@@ -2,26 +2,29 @@ import axios from 'axios'
 import Vue from 'vue'
 import store from '../store/index'
 
-
 const service = axios.create({
     baseURL: "https://api.github.com",
-    timeout: 15000
+    timeout: 10000
 })
 
 service.interceptors.request.use(
     config => {
         let token = store.state.token.token
         if (token) {
-            let sp = "?"
-            if (config.url.indexOf("?") >= 0) {
-                sp = "&"
-            }
-            config.url = config.url + sp + "access_token=" + token
+            //access_token 作为查询参数附加到URL,已被 GitHub API 弃用
+            // let sp = "?"
+            // if (config.url.indexOf("?") >= 0) {
+            //     sp = "&"
+            // }
+            // config.url = config.url + sp + "access_token=" + token
+            // 设置 Authorization 头
+            config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config
     },
     error => {
-
+        console.error(error)
+        return Promise.reject(error);
     }
 )
 

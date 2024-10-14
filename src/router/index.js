@@ -142,7 +142,8 @@ export const constantRouterMap = [
         redirect: '/user/readme/main',
         component: Layout,
         meta: {
-            type: "user",
+            //将type: "user" 中的user改成hide，暂时将README.md，不在侧边栏菜单中显示
+            type: "hide",
             icon: 'el-icon-document',
             title: 'README.md'
         },

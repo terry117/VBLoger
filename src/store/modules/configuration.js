@@ -17,7 +17,7 @@ const configuration = {
 
     mutations: {
         SET_CONFIGURATION: (state, configuration) => {
-            state.githubUsername = configuration["githubUsername"] || "Terry"
+            state.githubUsername = configuration["githubUsername"] || "terry117"
 
             state.blogTitle = configuration["blogTitle"] || state.githubUsername
 
@@ -57,7 +57,10 @@ const configuration = {
             } else {
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
             }
-            xmlhttp.open("GET", "../../../static/configuration.json", false)
+            const relativePath  = "../../../static/configuration.json";
+            const url = new URL(relativePath, window.location.href);
+            console.log("请求的完整 URL: ", url.href);
+            xmlhttp.open("GET", relativePath, false)
             xmlhttp.send()
             let configuration = JSON.parse(xmlhttp.responseText)
             commit('SET_CONFIGURATION', configuration)

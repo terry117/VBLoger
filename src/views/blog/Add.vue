@@ -3,12 +3,13 @@
         <el-card shadow="never" style="margin-bottom: 20px">
             <el-form ref="form" :model="form" label-width="80px" :rules="ruleValidate">
                 <el-form-item label="标题" prop="title">
-                    <el-input v-model="form.title"></el-input>
+                    <el-input v-model="form.title" />
                 </el-form-item>
                 <el-form-item label="简要说明" prop="description">
-                    <el-input v-model="form.description" type="textarea"></el-input>
+                    <el-input v-model="form.description" type="textarea"/>
                 </el-form-item>
                 <el-form-item label="博客正文" prop="content">
+                    <!-- 使用 mavon-editor 进行 Markdown 编辑 -->
                     <mavon-editor @imgAdd="imgAdd" style="max-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars"
                     />
                 </el-form-item>
