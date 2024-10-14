@@ -5,20 +5,21 @@ export default {
     getBlogReadme: function () {
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/README.md'
+            //获取仓库personalblog根目录下README.md 内容
+            url: '/repos/' + githubUsername + '/' + 'personalblog/contents/README.md'
         })
     },
     getBlogConfigure: function () {
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/static/configuration.json'
+            url: '/repos/' + githubUsername + '/' + 'personalblog/contents/configuration.json'
         })
     },
     editBlogConfigure: function (configure, sha) {
         let content = JSON.stringify(configure)
         let githubUsername = store.state.configuration.githubUsername
         return request({
-            url: '/repos/' + githubUsername + '/' + githubUsername + '.github.io/contents/static/configuration.json',
+            url: '/repos/' + githubUsername + '/' + 'personalblog/contents/configuration.json',
             method: 'PUT',
             data: {
                 "message": "a",

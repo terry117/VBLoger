@@ -124,7 +124,8 @@ export const constantRouterMap = [
         redirect: '/user/helper/main',
         component: Layout,
         meta: {
-            type: "user",
+            ////将type: "user" 中的user改成hide，暂时将README.md，不在侧边栏菜单中显示
+            type: "hide",
             icon: 'el-icon-printer',
             title: '使用帮助',
             mini: true

@@ -57,7 +57,9 @@ const configuration = {
             } else {
                 xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
             }
-            const relativePath  = "../../../static/configuration.json";
+            // 判断是否是开发环境
+            const isDevelopment = process.env.NODE_ENV === 'development';
+            const relativePath = isDevelopment ?  "../../../static/configuration.json": "/PersonalBlog/configuration.json";
             const url = new URL(relativePath, window.location.href);
             console.log("请求的完整 URL: ", url.href);
             xmlhttp.open("GET", relativePath, false)
