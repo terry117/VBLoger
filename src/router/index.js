@@ -124,17 +124,16 @@ export const constantRouterMap = [
         redirect: '/user/helper/main',
         component: Layout,
         meta: {
-            ////将type: "user" 中的user改成hide，暂时将README.md，不在侧边栏菜单中显示
-            type: "hide",
-            icon: 'el-icon-printer',
-            title: '使用帮助',
+            type: "user",
+            icon: 'el-icon-view',
+            title: '业途斑斓',
             mini: true
         },
         children: [
             {
                 path: 'main',
                 component: HelperMain,
-                meta: { title: '使用帮助' }
+                meta: { title: '业途斑斓' }
             }
         ]
     },
