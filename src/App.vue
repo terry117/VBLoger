@@ -25,7 +25,7 @@
             console.log(`当前全路径： ${window.location.href}`);
             console.log(`当前子路径： ${this.$route.path}`);
             let pathArr = this.$route.path.split("/")
-            console.log(`屏幕长： ${windowSize.height} ； 屏幕宽： ${windowSize.width} `);
+            console.log(`屏幕高： ${windowSize.height} ； 屏幕宽： ${windowSize.width} `);
             if (pathArr[1] == "user" && windowSize.height > windowSize.width * 1.2) {
                 this.$router.push("/mobile/user/blog")
             }
