@@ -5,7 +5,7 @@
 </template>
 
 <script>
-   import { mapGetters } from 'vuex'
+   import { mapGetters } from 'vuex';
     export default {
         name: 'App',
         computed: {
@@ -21,10 +21,11 @@
             this.$store.dispatch("Init")
             this.$store.dispatch("GetInfo")
             this.$setTitle(this.$route.meta.title)
-            let windowSize = this.$util.getWindowSize()
+            let windowSize = this.$util.getWindowSize()    
             console.log(`当前全路径： ${window.location.href}`);
             console.log(`当前子路径： ${this.$route.path}`);
             let pathArr = this.$route.path.split("/")
+            console.log(`屏幕长： ${windowSize.height} ； 屏幕宽： ${windowSize.width} `);
             if (pathArr[1] == "user" && windowSize.height > windowSize.width * 1.2) {
                 this.$router.push("/mobile/user/blog")
             }

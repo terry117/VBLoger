@@ -104,8 +104,8 @@
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import ProjectApi from '@/api/project'
+import ProjectApi from '@/api/project';
+import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
@@ -177,8 +177,8 @@ export default {
             this.initConfigure = JSON.parse(JSON.stringify(this.configure))
             this.configureSha = result.sha
             })
-            .catch(error => {
-                console.error('请求失败', error)
+            .catch(ex => {
+                console.error('请求失败'+ex)
                 this.$message.error("加载配置失败，请稍后重试");
             })
             .finally(() => {
