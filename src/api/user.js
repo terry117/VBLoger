@@ -8,6 +8,7 @@ function logAndRequest(config) {
 
 export default {
     verifyToken: function (token) {
+        //过时
         // return request({
         //     url: '/user?access_token=' + token
         // })

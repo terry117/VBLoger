@@ -263,7 +263,7 @@
 
 <style>
     .page-header {
-        padding: 5rem 6rem;
+        padding: 2rem 3rem;
         color: #fff;
         text-align: center;
         background-color: #159957;

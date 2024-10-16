@@ -1,12 +1,34 @@
 import UserApi from '@/api/user'
 import Cookie from '@/utils/cookie'
+import CryptoJS from 'crypto-js'
 import Vue from 'vue'
 import store from '../index'
 
+const ENCRYPTION_KEY = "terry117"
+// 加密函数
+function encryptToken(token) {
+    return CryptoJS.AES.encrypt(token, ENCRYPTION_KEY).toString();
+}
+
+
+// 解密函数
+function decryptToken(encryptedToken) {
+    const bytes = CryptoJS.AES.decrypt(encryptedToken, ENCRYPTION_KEY);
+    return bytes.toString(CryptoJS.enc.Utf8)
+}
+
+function test(key)
+{
+    let encryptResult =  encryptToken(key)
+    console.log('encrypt: ' + encryptResult)
+    let decryptResult = decryptToken(encryptResult)
+    console.log('decrypt: ' + decryptResult)
+}
+
 const TOKEN_KEY = "TOKEN_KEY"
 const token = {
-    state: {
-        token: Cookie.getAttribute(TOKEN_KEY)
+    state: {        
+        token: Cookie.getAttribute(TOKEN_KEY) || decryptToken('U2FsdGVkX1+9yt0eiDbTFnJHA/3HPGylocxaW350XpfzdiavvbecvuwgTQVJv8HSOqwOpFzs7POJpZPo9RC1Yw==' )
     },
 
     mutations: {

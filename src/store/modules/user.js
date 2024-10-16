@@ -38,7 +38,7 @@ const user = {
             UserApi.getInfo()
             .then(response => {
                 let result = response.data
-                console.table('请求数据：' + JSON.stringify(result, null, 2))
+                //console.table('请求数据：' + JSON.stringify(result, null, 2))
                 commit('SET_AVATAR_URL', result['avatar_url'])
                 commit('SET_NAME', result['name'])
                 commit('SET_LOCATION', result['location'])
