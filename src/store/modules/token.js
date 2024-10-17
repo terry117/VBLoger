@@ -24,7 +24,7 @@ const token = {
 
         SET_Bolg_TOKEN: (state, value) => {
             state.blogToken = value
-            Cookie.setAttribute(TOKEN_KEY, value, 30)
+            Cookie.setAttribute(BlogTOKEN_KEY, value, 30)
         },
     },
 
