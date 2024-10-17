@@ -1,34 +1,15 @@
 import UserApi from '@/api/user'
+import Ase from '@/utils/ase'
 import Cookie from '@/utils/cookie'
-import CryptoJS from 'crypto-js'
 import Vue from 'vue'
 import store from '../index'
 
-const ENCRYPTION_KEY = "terry117"
-// 加密函数
-function encryptToken(token) {
-    return CryptoJS.AES.encrypt(token, ENCRYPTION_KEY).toString();
-}
-
-
-// 解密函数
-function decryptToken(encryptedToken) {
-    const bytes = CryptoJS.AES.decrypt(encryptedToken, ENCRYPTION_KEY);
-    return bytes.toString(CryptoJS.enc.Utf8)
-}
-
-function test(key)
-{
-    let encryptResult =  encryptToken(key)
-    console.log('encrypt: ' + encryptResult)
-    let decryptResult = decryptToken(encryptResult)
-    console.log('decrypt: ' + decryptResult)
-}
-
 const TOKEN_KEY = "TOKEN_KEY"
+const BlogTOKEN_KEY = "BlogTOKEN_KEY"
 const token = {
-    state: {        
-        token: Cookie.getAttribute(TOKEN_KEY) || decryptToken('U2FsdGVkX1+9yt0eiDbTFnJHA/3HPGylocxaW350XpfzdiavvbecvuwgTQVJv8HSOqwOpFzs7POJpZPo9RC1Yw==' )
+    state: {
+        token: Cookie.getAttribute(TOKEN_KEY) || Ase.decryptToken('U2FsdGVkX1+9yt0eiDbTFnJHA/3HPGylocxaW350XpfzdiavvbecvuwgTQVJv8HSOqwOpFzs7POJpZPo9RC1Yw=='),
+        blogToken: Cookie.getAttribute(BlogTOKEN_KEY)
     },
 
     mutations: {
@@ -39,7 +20,12 @@ const token = {
         REMOVE_TOKEN: (state) => {
             state.token = null
             Cookie.remove(TOKEN_KEY)
-        }
+        },
+
+        SET_Bolg_TOKEN: (state, value) => {
+            state.blogToken = value
+            Cookie.setAttribute(TOKEN_KEY, value, 30)
+        },
     },
 
     actions: {
@@ -67,7 +53,7 @@ const token = {
                     })
                 }
             }).catch((error) => {
-                console.error('验证Token异常：'+error)
+                console.error('验证Token异常：' + error)
             })
         },
         Cancellation({ commit }) {
@@ -76,6 +62,22 @@ const token = {
                 message: 'Token取消绑定',
                 type: 'info'
             })
+        },
+
+        //申请博客编写权限
+        ApplyBolgAuthentication({ commit }, bolgToken) {
+            if (blogToken == '2FsdGVkX1/B38gVbzqW2tbUC34To/o2DXbL5KrpuTQ=') {
+                commit('SET_Bolg_TOKEN', bolgToken)
+                Vue.prototype.$notify({
+                    title: '成功',
+                    message: '申请博文权限成功',
+                    type: 'success'
+                })
+            }else {
+                Vue.prototype.$message({
+                    message: '密码错误',
+                    type: 'error'
+                })}
         },
     }
 }

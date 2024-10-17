@@ -1,14 +1,17 @@
 <template>
     <div style="min-height: 600px" v-loading="loading">
         <el-card shadow="never" style="margin-bottom: 20px">
-            <el-input placeholder="请输入关键字" v-model="searchKey" clearable style="width: 300px"></el-input>
-            <el-button @click="search" icon="el-icon-search" style="margin-left: 10px" circle plain></el-button>
-            <el-button @click="$share()" style="margin-left: 10px" icon="el-icon-share" type="warning" plain circle></el-button>
-            <el-button type="primary" icon="el-icon-edit" round plain style="float: right;" @click="goAdd">写博文</el-button>
+            <el-input placeholder="请输入关键字" v-model="searchKey" clearable style="width: 250px" />
+            <el-button @click="search" icon="el-icon-search" style="margin-left: 5px" circle plain />
+            <el-button @click="$share()" style="margin-left: 5px" icon="el-icon-share" type="warning" plain circle />
+
+            <el-input placeholder="密码" v-if="blogToken" v-model="editBlogPermission"  clearable style="width: 120px;margin-left: 10px;" />
+            <el-button type="primary" v-if="blogToken" icon="el-icon-s-promotion" round plain style="margin-left: 5px" >申请权限</el-button>
+            <el-button type="primary" v-if="!blogToken" icon="el-icon-edit" round plain style="float: right;" @click="goAdd">写博文</el-button>
         </el-card>
 
         <div v-if="blogs&&blogs.length>0">
-            <el-card shadow="hover" v-for="(item,index) in blogs" :key="'p'+index" style="margin-bottom: 20px" v-if="!item.hide">
+            <el-card shadow="hover" v-for="(item,index) in blogs" :key="'p'+index" style="margin-bottom: 20px" v-show="!item.hide">
                 <div slot="header">
                     <el-row>
                         <el-col :span="16">
@@ -62,12 +65,14 @@
                 },
                 loading: false,
                 searchKey: "",
-                blogs: []
+                blogs: [],
+                editBlogPermission: "",
             }
         },
         computed: {
             ...mapGetters([
                 'token',
+                'blogToken'
             ])
         },
         mounted() {
@@ -103,6 +108,10 @@
                 for (let i = 0; i < this.blogs.length; i++) {
                     this.blogs[i].hide = this.blogs[i].title.indexOf(this.searchKey) < 0
                 }
+            },
+            applyPermission()
+            {
+                this.$store.dispatch("Authentication", this.editBlogPermission)
             },
             editBlog(index) {
                 if (!this.token) {

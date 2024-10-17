@@ -61,8 +61,7 @@
                 this.$router.push(index)
             },
             openTokenDialog() {
-                this.$refs.tokenDialog.open(() => {
-           
+                this.$refs.tokenDialog.open(() => {         
                 })
             },
             cancellation() {

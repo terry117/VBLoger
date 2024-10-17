@@ -1,5 +1,6 @@
 const getters = {
     token: state => state.token.token,
+    blogToken:state => state.token.blogToken,
     githubUsername: state => state.configuration.githubUsername,
     blogTitle: state => state.configuration.blogTitle,
     blogDescribe: state => state.configuration.blogDescribe,
@@ -18,7 +19,6 @@ const getters = {
     blog: state => state.user.blog,
     followersTotal: state => state.user.followers,
     followingTotal: state => state.user.following,
-
 
 }
 export default getters
